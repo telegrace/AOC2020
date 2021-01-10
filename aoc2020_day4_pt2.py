@@ -990,16 +990,19 @@ ecl:hzl hgt:181cm byr:1980 hcl:#341e13 eyr:2028""" # passport input
 
 passport_list = passport_rawdata.split("\n\n") # split at \n\n, resulting in list of passports 
 requirements = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"] # list of requirements, CID is optional so left off the list
+requirements = sorted(requirements)
 
-
+for r in requirements:
+    print(r)
 valid_passport_list=[]
 valid_passports = 0
 
+
+"""
 for passport in passport_list:  
     passport_details = passport.replace("\n"," ") # replace \n with a space, resulting all passport details being seperated with a space 
     passport_details = passport_details.split(" ") # split at spaces, resulting in individual passport details 
-    
-    #organise passport details alphabetically?
+    passport_details = sorted(passport_details) #organise passport details alphabetically?
 
     valid_info = 0
     
@@ -1024,3 +1027,4 @@ for passport in passport_list:
             
 print(f"There are {len(passport_list)} passports, and {valid_passports} are valid.")
 
+"""
