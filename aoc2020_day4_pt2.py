@@ -990,19 +990,22 @@ ecl:hzl hgt:181cm byr:1980 hcl:#341e13 eyr:2028""" # passport input
 
 passport_list = passport_rawdata.split("\n\n") # split at \n\n, resulting in list of passports 
 requirements = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"] # list of requirements, CID is optional so left off the list
+
+
+valid_passport_list=[]
 valid_passports = 0
 
-# one passport with unorganised information
 for passport in passport_list:  
-    print("\n  ***********************************************\n****                NEW PASSPORT               ****\n  ***********************************************")
     passport_details = passport.replace("\n"," ") # replace \n with a space, resulting all passport details being seperated with a space 
     passport_details = passport_details.split(" ") # split at spaces, resulting in individual passport details 
+    
+    #organise passport details alphabetically?
+
     valid_info = 0
     
     for detail in passport_details:
         information = detail[0] + detail[1] + detail[2] # this gets the requirement i.e "byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid
         print(f"This is the needed information to crosscheck, {information}.")
-
         i = 0
         
         # check individual detail to see if it matches an item in the requirements list 
@@ -1013,9 +1016,11 @@ for passport in passport_list:
                 valid_info += 1
                 if valid_info == 7:
                     valid_passports +=1
+                    valid_passport_list = valid_passport_list.append(detail) 
                 else:
                     i+=1
             else:
                 i += 1
             
 print(f"There are {len(passport_list)} passports, and {valid_passports} are valid.")
+
